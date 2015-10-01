@@ -1,6 +1,12 @@
-# Lingo
+# Lingo - Server
 
-Current play stack
+### Lingo(working title) aims to help teachers and students learning foreign language by using new advances in webRTC to create helpful virtual classroom tools.
+
+This repo is for the server component of *Lingo*
+
+If you are looking for the web client please visit: [https://github.com/brancusi/lingo-client](https://github.com/brancusi/lingo-client)
+
+Current stack
 
 1. Tokbox
 1. Rails
@@ -42,29 +48,3 @@ OT_API_SECRET=YOUR_API_SECRET
 ```bash
 rails s
 ```
-
-## Setup client
-
-### Install [ember-cli](http://www.ember-cli.com/)
-```bash
-npm install -g ember-cli
-```
-
-```bash
-cd client
-
-npm install
-
-bower install
-```
-
-### Start ember
-
-```bash
-ember s
-```
-
-In one browser tab, navigate to [localhost:4200/chats/myroom](http://localhost:4200/chats/myroom)
-In a second browser tab, navigate to [localhost:4200/chats/myroom](http://localhost:4200/chats/myroom)
-
-*See how fly you are*
