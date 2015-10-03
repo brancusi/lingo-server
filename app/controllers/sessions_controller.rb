@@ -3,9 +3,8 @@ class SessionsController < ApplicationController
 
     # Find existing session_if for requested room name
     room_name = request.params['room_name'];
-
+    
     raise "You must specify a room name" if room_name.nil?
-
 
     session_id = find_or_create_session_id(room_name)
     token = generate_room_token(session_id)
