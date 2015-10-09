@@ -2,16 +2,19 @@ class SessionsController < ApplicationController
   def create
 
     # Find existing session_if for requested room name
-    room_name = request.params['room_name'];
-    
-    raise "You must specify a room name" if room_name.nil?
+    guid = request.params['guid'];
 
-    session_id = find_or_create_session_id(room_name)
+    raise "You must specify a room name" if guid.nil?
+
+    session_id = find_or_create_session_id(guid)
     token = generate_room_token(session_id)
 
-    render json: {api_key: ENV['OT_API_KEY'],
+    render json: {
+                  api_key: ENV['OT_API_KEY'],
                   session_id: session_id,
-                  token: token}
+                  token: token,
+                  guid: guid
+                }
   end
 
   private
@@ -20,13 +23,13 @@ class SessionsController < ApplicationController
       opentok.generate_token session_id
     end
 
-    def find_or_create_session_id (room_name)
-      matched_session = OpenTalkSession.find_by(name:room_name)
+    def find_or_create_session_id (guid)
+      matched_session = OpenTalkSession.find_by(name:guid)
 
       if matched_session.nil?
         opentok = OpenTok::OpenTok.new ENV['OT_API_KEY'], ENV['OT_API_SECRET']
         new_session = opentok.create_session :media_mode => :relay
-        matched_session = OpenTalkSession.create(name:room_name, session_id:new_session.session_id);
+        matched_session = OpenTalkSession.create(name:guid, session_id:new_session.session_id);
       end
 
       matched_session.session_id
