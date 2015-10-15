@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'jbuilder', '~> 2.0'
+gem 'aws-sdk', '~> 2'
 
 # webrtc gems
 gem "opentok", "~> 2.2"
